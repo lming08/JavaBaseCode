@@ -1,4 +1,5 @@
 
+// 继承Exception可以使得NumException能够被throw/throws
 class NumException extends Exception {
 
 	private int num;
@@ -20,6 +21,7 @@ public class CheckNum {
 		this.num = num;
 	}
 	
+	// 注意这里的throws/throw
 	public void check() throws NumException {
 		if (num < 0 || num > 100) {
 			throw new NumException(num);
