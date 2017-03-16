@@ -8,8 +8,20 @@ class NumException extends Exception {
 	}
 	@Override
 	public String getMessage() {
-		return "Error:" + num;
+		return "[NumException Error]:" + num;
 	}
+}
+
+class NumRuntimeException extends RuntimeException {
+
+    private int num;
+    public NumRuntimeException(int num) {
+        this.num = num;
+    }
+    @Override
+    public String getMessage() {
+        return "[NumRuntimeException Error]:" + num;
+    }
 }
 
 public class CheckNum {
@@ -34,6 +46,13 @@ public class CheckNum {
 		CheckNum cn = new CheckNum(this.num);
 		cn.check();
 	}
+
+	// 使用throw抛出RuntimeException后, 调用方是可以不用try catch处理的
+    public void check_with_no_trycatch() {
+        if (this.num < 0 || this.num > 100) {
+            throw new NumRuntimeException(this.num);
+        }
+    }
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -53,7 +72,8 @@ public class CheckNum {
 		try {
 			cn.check_with_no_throw();
 		} catch (NumException e) {
-			e.printStackTrace();
+            System.out.println(e.getMessage());
 		}
+		cn.check_with_no_trycatch();
 	}
 }
