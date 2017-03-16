@@ -6,6 +6,7 @@ class NumException extends Exception {
 	public NumException(int num) {
 		this.num = num;
 	}
+	@Override
 	public String getMessage() {
 		return "Error:" + num;
 	}
@@ -27,6 +28,12 @@ public class CheckNum {
 			throw new NumException(num);
 		}
 	}
+
+	// 可以不使用throw抛出异常
+	public void check_with_no_throw() throws NumException {
+		CheckNum cn = new CheckNum(this.num);
+		cn.check();
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -41,6 +48,12 @@ public class CheckNum {
 			cn.check();
 		} catch (NumException e) {
 			System.out.println(e.getMessage());
+		}
+		cn.setNum(-1);
+		try {
+			cn.check_with_no_throw();
+		} catch (NumException e) {
+			e.printStackTrace();
 		}
 	}
 }
